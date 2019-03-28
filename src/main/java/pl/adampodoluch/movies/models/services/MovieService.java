@@ -3,19 +3,21 @@ package pl.adampodoluch.movies.models.services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.adampodoluch.movies.models.entities.UserEntity;
+import pl.adampodoluch.movies.models.entities.VoteEntity;
 import pl.adampodoluch.movies.models.forms.LoginForm;
 import pl.adampodoluch.movies.models.repositories.MovieRepository;
 import pl.adampodoluch.movies.models.entities.AuthorEntity;
 import pl.adampodoluch.movies.models.entities.MovieEntity;
 import pl.adampodoluch.movies.models.forms.MovieForm;
 import pl.adampodoluch.movies.models.repositories.UserRepository;
+import pl.adampodoluch.movies.models.repositories.VoteRepository;
 
 import java.util.Optional;
 
 @Service
 public class MovieService {
     public enum MovieResponse {
-        CREATED, AUTHOR_NOT_EXIST, TITLE_ALREADY_EXIST, U_ARE_NOT_ADMIN}
+        CREATED, AUTHOR_NOT_EXIST, TITLE_ALREADY_EXIST}
 
     @Autowired
     MovieRepository movieRepository;
@@ -23,11 +25,9 @@ public class MovieService {
     @Autowired
     AuthorService authorService;
 
-    @Autowired
-    UserRepository userRepository;
 
     @Autowired
-    UserSession userSession;
+    VoteRepository voteRepository;
 
 
     public Iterable<MovieEntity> getAll(){
@@ -57,7 +57,12 @@ public class MovieService {
         movieEntity.setYear(movieForm.getYear());
         movieEntity.setTitle(movieForm.getTitle());
 
-        movieRepository.save(movieEntity);
+        MovieEntity movieEntitySaved = movieRepository.save(movieEntity);
+
+        VoteEntity voteEntity = new VoteEntity();
+        voteEntity.setMovie(movieEntitySaved);
+
+        voteRepository.save(voteEntity);
         return MovieResponse.CREATED;
     }
 

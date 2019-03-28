@@ -11,7 +11,23 @@
         <span th:text="${oneMovie.getLongDescription()}"></span>
             <br/>
        <i th:text="${oneMovie.getYear()}"></i>
-       <strong th:text="${oneMovie.getAuthor().getBirthday()}"></strong>
+       <strong th:text="${oneMovie.getAuthor().getBirthday()}"></strong></div>
+
+   <div th:if="${oneMovie.getVote() != null}">
+       <div>
+           <span th:text="${oneMovie.getVote().getUpVoteCount()}"></span>
+           <a th:href="'/vote/up/' + ${oneMovie.getId()}">(+)</a>
+       </div>
+       <div>
+           <span th:text="${oneMovie.getVote().getDownVoteCount()}"></span>
+           <a th:href="'/vote/down/' + ${oneMovie.getId()}">(-)</a>
+       </div>
+   </div>
+
+
+
+
+
 
        <ul>
            <li th:each="comment : ${oneMovie.getComments()}" th:text="${comment.getComment() + ' |  ' + comment.getCreationTime() + ' ' + comment.getUser().getLogin()}"></li>

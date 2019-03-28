@@ -2,6 +2,9 @@ package pl.adampodoluch.movies.models.entities;
 
 
 import lombok.Data;
+import org.aspectj.weaver.ast.Not;
+import org.hibernate.annotations.NotFound;
+import org.hibernate.annotations.NotFoundAction;
 import org.springframework.data.domain.Sort;
 
 import javax.persistence.*;
@@ -26,4 +29,9 @@ public class MovieEntity {
     @OneToMany(mappedBy = "movie")
     @OrderBy("creation_time DESC ")
     List<CommentEntity>  comments;
+
+    @OneToOne(mappedBy = "movie")
+    @NotFound(action = NotFoundAction.IGNORE)
+    VoteEntity vote;
+
 }
