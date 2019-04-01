@@ -25,7 +25,6 @@ public class MovieService {
     @Autowired
     AuthorService authorService;
 
-
     @Autowired
     VoteRepository voteRepository;
 
@@ -37,7 +36,6 @@ public class MovieService {
     public MovieResponse addMovie(MovieForm movieForm){
         MovieEntity movieEntity = new MovieEntity();
         AuthorEntity authorEntity = authorService.findBySurname(movieForm.getAuthor());
-        UserEntity userEntity = new UserEntity();
 
         if(authorEntity == null){
             return MovieResponse.AUTHOR_NOT_EXIST;

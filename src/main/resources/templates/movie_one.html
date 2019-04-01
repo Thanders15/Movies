@@ -10,7 +10,7 @@
             <br/>
         <span th:text="${oneMovie.getLongDescription()}"></span>
             <br/>
-       <i th:text="${oneMovie.getYear()}"></i>
+       <i th:text="${oneMovie.getYear()}"></i></br>
        <strong th:text="${oneMovie.getAuthor().getBirthday()}"></strong></div>
 
    <div th:if="${oneMovie.getVote() != null}">

@@ -2,6 +2,7 @@ package pl.adampodoluch.movies.models.services;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -13,6 +14,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import pl.adampodoluch.movies.models.entities.UserEntity;
 import pl.adampodoluch.movies.models.forms.LoginForm;
+import pl.adampodoluch.movies.models.forms.RegisterForm;
 import pl.adampodoluch.movies.models.repositories.UserRepository;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -56,5 +58,20 @@ class UserServiceTest {
 
 
         Assertions.assertTrue(userService.login(loginForm));
+    }
+
+    @Test
+    void shouldNotRegisterAlreadyTakenUsername(){
+        //given
+        RegisterForm registerForm = new RegisterForm();
+        registerForm.setLogin("test");
+        registerForm.setEmail("test");
+        registerForm.setPassword("test");
+
+        //when
+        Mockito.when(userRepository.isLoginExist("test")).thenReturn(true);
+
+        //then
+        Assertions.assertFalse(userService.registerUser(registerForm));
     }
 }
