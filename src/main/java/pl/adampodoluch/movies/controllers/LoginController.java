@@ -43,7 +43,7 @@ public class LoginController {
     @PostMapping("/account")
     public String makeAccount(@ModelAttribute("account") RegisterForm registerForm, Model model) {
         if(!userService.registerUser(registerForm)){
-            model.addAttribute("register", "Twoj login jest zajety");
+            model.addAttribute("register", "Yours login is busy");
             return "register_user";
         }
         return "redirect:/login";

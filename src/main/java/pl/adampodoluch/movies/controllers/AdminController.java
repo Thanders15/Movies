@@ -7,11 +7,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import pl.adampodoluch.movies.models.forms.LoginForm;
 import pl.adampodoluch.movies.models.forms.MovieForm;
 import pl.adampodoluch.movies.models.services.MovieService;
 import pl.adampodoluch.movies.models.services.UserService;
-import pl.adampodoluch.movies.models.services.UserSession;
 
 @Controller
 public class AdminController {

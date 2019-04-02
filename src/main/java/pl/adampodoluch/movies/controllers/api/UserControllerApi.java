@@ -8,8 +8,6 @@ import pl.adampodoluch.movies.models.entities.UserEntity;
 import pl.adampodoluch.movies.models.forms.RegisterForm;
 import pl.adampodoluch.movies.models.services.UserService;
 
-import java.util.Optional;
-
 @RequestMapping("/api")
 @RestController
 public class UserControllerApi {
